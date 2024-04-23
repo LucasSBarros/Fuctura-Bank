@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import models.ContaCorrente;
@@ -9,12 +10,14 @@ import models.ContaPoupanca;
 
 public class GeradorDeContas {
 
+	static Random random = new Random();
+
 	private static List<ContaCorrente> ccs;
 	private static List<ContaPoupanca> cps;
 
 	public GeradorDeContas() {
-	    GeradorDeContas.ccs = new ArrayList<>();
-	    GeradorDeContas.cps = new ArrayList<>();
+		GeradorDeContas.ccs = new ArrayList<>();
+		GeradorDeContas.cps = new ArrayList<>();
 	}
 
 	public static void criarConta(int opcao) {
@@ -36,20 +39,20 @@ public class GeradorDeContas {
 
 				System.out.println("Qual o valor do depósito inicial? ");
 				double valor = sc.nextDouble();
-				
-				ContaCorrente.setContador(ContaCorrente.getContador() + 1);
-				
-				ccs.add(new ContaCorrente(nomeDaConta, nomeDoCliente, valor));
-				
-				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + (ccs.get(ContaCorrente.getContador()-1).getId() - 1) + "\n");
+
+				int numeroRandomico = random.nextInt(1000);
+
+				ccs.add(new ContaCorrente(numeroRandomico, nomeDaConta, nomeDoCliente, valor));
+
+				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + numeroRandomico + "\n");
 
 			} else if (resposta.equalsIgnoreCase("n")) {
 
-				ContaCorrente.setContador(ContaCorrente.getContador() + 1);
+				int numeroRandomico = random.nextInt(1000);
 
-				ccs.add(new ContaCorrente(nomeDaConta, nomeDoCliente, 0.0));
-				
-				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + (ccs.get(ContaCorrente.getContador()-1).getId() - 1) + "\n");
+				ccs.add(new ContaCorrente(numeroRandomico, nomeDaConta, nomeDoCliente, 0.0));
+
+				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + numeroRandomico + "\n");
 
 			} else {
 				System.out.println("Opção inválida.\n");
@@ -72,19 +75,19 @@ public class GeradorDeContas {
 				System.out.println("Qual o valor do depósito inicial? ");
 				double valor = sc.nextDouble();
 
-				ContaPoupanca.setContador(ContaCorrente.getContador() + 1);
+				int numeroRandomico = random.nextInt(1000);
 
-				cps.add(new ContaPoupanca(nomeDaConta, nomeDoCliente, valor));
-								
-				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + (cps.get(ContaPoupanca.getContador()-1).getId() - 1) + "\n");
+				cps.add(new ContaPoupanca(numeroRandomico, nomeDaConta, nomeDoCliente, valor));
+
+				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + numeroRandomico + "\n");
 
 			} else if (resposta.equalsIgnoreCase("n")) {
 
-				ContaPoupanca.setContador(ContaCorrente.getContador() + 1);
+				int numeroRandomico = random.nextInt(1000);
 
-				cps.add(new ContaPoupanca(nomeDaConta, nomeDoCliente, 0.0));
-				
-				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + (cps.get(ContaPoupanca.getContador()-1).getId() - 1) + "\n");
+				cps.add(new ContaPoupanca(numeroRandomico, nomeDaConta, nomeDoCliente, 0.0));
+
+				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + numeroRandomico + "\n");
 
 			} else {
 				System.out.println("Opção inválida.\n");

@@ -2,22 +2,20 @@ package models;
 
 public class ContaPoupanca extends Contas {
 
-	private int id;
-	private static int contador;
+	private int numero;
 
-	public ContaPoupanca(String nomeDaConta, String nomeDoTitular, double saldoDisponivel) {
+	public ContaPoupanca(int numero, String nomeDaConta, String nomeDoTitular, double saldoDisponivel) {
 		super(nomeDaConta, nomeDoTitular, saldoDisponivel);
-		this.contador = contador++;
-		this.id = contador;
+		this.numero = numero;
 
 	}
 
 	public void resgatarValores(ContaPoupanca contaPoupanca, ContaCorrente contaCorrente, double valor) {
 
-		if (valor > 0 && contaCorrente.getSaldoDisponivel() >= valor) {
+		if (valor > 0 && contaPoupanca.getSaldoDisponivel() >= valor) {
 
-			contaCorrente.setSaldoDisponivel(contaCorrente.getSaldoDisponivel() + valor);
 			contaPoupanca.setSaldoDisponivel(contaPoupanca.getSaldoDisponivel() - valor);
+			contaCorrente.setSaldoDisponivel(contaCorrente.getSaldoDisponivel() + valor);
 
 			System.out.println("Resgate realizado com sucesso!\\n");
 
@@ -29,20 +27,12 @@ public class ContaPoupanca extends Contas {
 
 	}
 
-	public int getId() {
-		return id;
+	public int getNumero() {
+		return numero;
 	}
 
-	public static int getContador() {
-		return contador;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public static void setContador(int contador) {
-		ContaPoupanca.contador = contador;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 }

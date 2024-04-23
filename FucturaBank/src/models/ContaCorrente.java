@@ -2,14 +2,11 @@ package models;
 
 public class ContaCorrente extends Contas {
 
-	private int id;
-	private static int contador;
+	private int numero;
 
-	public ContaCorrente(String nomeDaConta, String nomeDoTitular, double saldoDisponivel) {
+	public ContaCorrente(int numero, String nomeDaConta, String nomeDoTitular, double saldoDisponivel) {
 		super(nomeDaConta, nomeDoTitular, saldoDisponivel);
-		this.contador = contador++;
-		this.id = contador;
-
+		this.numero = numero;
 	}
 
 	public void sacarValores(double valor) {
@@ -42,20 +39,12 @@ public class ContaCorrente extends Contas {
 
 	}
 
-	public int getId() {
-		return id;
+	public int getNumero() {
+		return numero;
 	}
 
-	public static int getContador() {
-		return contador;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public static void setContador(int contador) {
-		ContaCorrente.contador = contador;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 }

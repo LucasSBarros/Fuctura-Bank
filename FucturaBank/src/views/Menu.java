@@ -1,13 +1,16 @@
 package views;
 
+import java.util.List;
 import java.util.Scanner;
 
 import controller.GeradorDeContas;
+import models.ContaCorrente;
+import models.ContaPoupanca;
 
 public class Menu {
 
 	GeradorDeContas gc = new GeradorDeContas();
-	
+
 	public void interfaceCliente() {
 
 		Scanner sc = new Scanner(System.in);
@@ -47,7 +50,7 @@ public class Menu {
 		if (opcao == 1 || opcao == 2) {
 
 			GeradorDeContas.criarConta(opcao);
-			
+
 			MenuCriarConta();
 
 		} else if (opcao == 3) {
@@ -73,20 +76,20 @@ public class Menu {
 		int opcao = sc.nextInt();
 
 		if (opcao == 1) {
-			
-			System.out.println("Informe o ID da sua conta corrente: ");
 
-			int id = sc.nextInt();
+			System.out.println("Informe o número da sua conta corrente: ");
 
-			contaCorrente(id);
+			int numero = sc.nextInt();
+
+			contaCorrente(numero);
 
 		} else if (opcao == 2) {
-			
-			System.out.println("Informe o ID da sua conta poupanca: ");
 
-			int id = sc.nextInt();
+			System.out.println("Informe o número da sua conta poupanca: ");
 
-			contaPoupanca(id);
+			int numero = sc.nextInt();
+
+			contaPoupanca(numero);
 
 		} else if (opcao == 3) {
 
@@ -101,7 +104,10 @@ public class Menu {
 
 	}
 
-	public void contaCorrente(int id) {
+	public void contaCorrente(int numero) {
+
+		List<ContaCorrente> contaCorrente = GeradorDeContas.getCcs();
+		List<ContaPoupanca> contaPoupanca = GeradorDeContas.getCps();
 
 		Scanner sc = new Scanner(System.in);
 
@@ -115,17 +121,29 @@ public class Menu {
 
 			System.out.println("Dados do cliente: \n");
 
-			GeradorDeContas.getCcs().get(id).exibirDados();
+			for (ContaCorrente cc : contaCorrente) {
 
-			contaCorrente(id);
+				if (numero == cc.getNumero()) {
+					cc.exibirDados();
+				}
+
+			}
+
+			contaCorrente(numero);
 
 		} else if (opcao == 2) {
 
 			System.out.println("Saldo da conta corrente do cliente: \n");
 
-			GeradorDeContas.getCcs().get(id).exibirSaldoDasContas();
+			for (ContaCorrente cc : contaCorrente) {
 
-			contaCorrente(id);
+				if (numero == cc.getNumero()) {
+					cc.exibirSaldoDasContas();
+				}
+
+			}
+
+			contaCorrente(numero);
 
 		} else if (opcao == 3) {
 
@@ -133,9 +151,15 @@ public class Menu {
 
 			double valor = sc.nextDouble();
 
-			GeradorDeContas.getCcs().get(id).depositar(valor);
+			for (ContaCorrente cc : contaCorrente) {
 
-			contaCorrente(id);
+				if (numero == cc.getNumero()) {
+					cc.depositar(valor);
+				}
+
+			}
+
+			contaCorrente(numero);
 
 		} else if (opcao == 4) {
 
@@ -143,9 +167,16 @@ public class Menu {
 
 			double valor = sc.nextDouble();
 
-			GeradorDeContas.getCcs().get(id).sacarValores(valor);
+			for (ContaCorrente cc : contaCorrente) {
 
-			contaCorrente(id);
+				if (numero == cc.getNumero()) {
+					cc.sacarValores(valor);
+					;
+				}
+
+			}
+
+			contaCorrente(numero);
 
 		} else if (opcao == 5) {
 
@@ -153,10 +184,29 @@ public class Menu {
 
 			double valor = sc.nextDouble();
 
-			GeradorDeContas.getCcs().get(id).aplicarValores(GeradorDeContas.getCps().get(id),
-					GeradorDeContas.getCcs().get(id), valor);
+			System.out.println("Informe a Conta Poupança que deseja aplicar: ");
 
-			contaCorrente(id);
+			int numeroContaPoupanca = sc.nextInt();
+
+			for (ContaCorrente cc : contaCorrente) {
+
+				if (numero == cc.getNumero()) {
+
+					for (ContaPoupanca cp : contaPoupanca) {
+
+						if (numeroContaPoupanca == cp.getNumero()) {
+
+							cc.aplicarValores(cp, cc, valor);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			contaCorrente(numero);
 
 		} else if (opcao == 6) {
 
@@ -165,13 +215,17 @@ public class Menu {
 		} else {
 
 			System.out.println("Opcao inválida!\n");
-			contaCorrente(id);
+
+			contaCorrente(numero);
 
 		}
 
 	}
 
-	public void contaPoupanca(int id) {
+	public void contaPoupanca(int numero) {
+
+		List<ContaCorrente> contaCorrente = GeradorDeContas.getCcs();
+		List<ContaPoupanca> contaPoupanca = GeradorDeContas.getCps();
 
 		Scanner sc = new Scanner(System.in);
 
@@ -185,17 +239,29 @@ public class Menu {
 
 			System.out.println("Dados do cliente: \n");
 
-			GeradorDeContas.getCps().get(id).exibirDados();
+			for (ContaPoupanca cp : contaPoupanca) {
 
-			contaPoupanca(id);
+				if (numero == cp.getNumero()) {
+					cp.exibirDados();
+				}
+
+			}
+
+			contaPoupanca(numero);
 
 		} else if (opcao == 2) {
 
 			System.out.println("Saldo da conta poupança do cliente: \n");
 
-			GeradorDeContas.getCps().get(id).exibirSaldoDasContas();
+			for (ContaPoupanca cp : contaPoupanca) {
 
-			contaPoupanca(id);
+				if (numero == cp.getNumero()) {
+					cp.exibirSaldoDasContas();
+				}
+
+			}
+
+			contaPoupanca(numero);
 
 		} else if (opcao == 3) {
 
@@ -203,9 +269,14 @@ public class Menu {
 
 			double valor = sc.nextDouble();
 
-			GeradorDeContas.getCps().get(id).depositar(valor);
+			for (ContaPoupanca cp : contaPoupanca) {
 
-			contaPoupanca(id);
+				if (numero == cp.getNumero()) {
+					cp.depositar(valor);
+				}
+			}
+
+			contaPoupanca(numero);
 
 		} else if (opcao == 4) {
 
@@ -213,10 +284,29 @@ public class Menu {
 
 			double valor = sc.nextDouble();
 
-			GeradorDeContas.getCps().get(id).resgatarValores(GeradorDeContas.getCps().get(id),
-					GeradorDeContas.getCcs().get(id), valor);
+			System.out.println("Informe a Conta Conrrente que deseja resgatar: ");
 
-			contaPoupanca(id);
+			int numeroContaCorrente = sc.nextInt();
+
+			for (ContaPoupanca cp : contaPoupanca) {
+
+				if (numero == cp.getNumero()) {
+
+					for (ContaCorrente cc : contaCorrente) {
+
+						if (numeroContaCorrente == cc.getNumero()) {
+
+							cp.resgatarValores(cp, cc, valor);
+
+						}
+
+					}
+
+				}
+
+			}
+
+			contaPoupanca(numero);
 
 		} else if (opcao == 5) {
 
@@ -225,7 +315,7 @@ public class Menu {
 		} else {
 
 			System.out.println("Opcao inválida!\n");
-			contaPoupanca(id);
+			contaPoupanca(numero);
 
 		}
 
