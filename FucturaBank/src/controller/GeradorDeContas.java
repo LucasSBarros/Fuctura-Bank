@@ -41,7 +41,7 @@ public class GeradorDeContas {
 				
 				ccs.add(new ContaCorrente(nomeDaConta, nomeDoCliente, valor));
 				
-				System.out.println("Conta corrente criada com sucesso!\n");
+				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + (ccs.get(ContaCorrente.getContador()-1).getId() - 1) + "\n");
 
 			} else if (resposta.equalsIgnoreCase("n")) {
 
@@ -49,7 +49,7 @@ public class GeradorDeContas {
 
 				ccs.add(new ContaCorrente(nomeDaConta, nomeDoCliente, 0.0));
 				
-				System.out.println("Conta corrente criada com sucesso!\n");
+				System.out.println("Conta corrente criada com sucesso!\n" + "\nID da Conta: " + (ccs.get(ContaCorrente.getContador()-1).getId() - 1) + "\n");
 
 			} else {
 				System.out.println("Opção inválida.\n");
@@ -75,8 +75,8 @@ public class GeradorDeContas {
 				ContaPoupanca.setContador(ContaCorrente.getContador() + 1);
 
 				cps.add(new ContaPoupanca(nomeDaConta, nomeDoCliente, valor));
-				
-				System.out.println("Conta poupança criada com sucesso!\n");
+								
+				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + (cps.get(ContaPoupanca.getContador()-1).getId() - 1) + "\n");
 
 			} else if (resposta.equalsIgnoreCase("n")) {
 
@@ -84,7 +84,7 @@ public class GeradorDeContas {
 
 				cps.add(new ContaPoupanca(nomeDaConta, nomeDoCliente, 0.0));
 				
-				System.out.println("Conta poupança criada com sucesso!\n");
+				System.out.println("Conta poupanca criada com sucesso!\n" + "\nID da Conta: " + (cps.get(ContaPoupanca.getContador()-1).getId() - 1) + "\n");
 
 			} else {
 				System.out.println("Opção inválida.\n");

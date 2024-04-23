@@ -27,8 +27,6 @@ public class ContaPoupanca extends Contas {
 
 		}
 
-		System.out.println("Resgate realizado com sucesso!\n");
-
 	}
 
 	public int getId() {
